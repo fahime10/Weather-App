@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>How is the weather?</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="current">
+            <h1 id="status"></h1>
+            <h2 id="country"></h2>
+            <p id="city"></p>
+            <h1 id="temperature"></h1>
+        </div>
+
+        <form id="location-info">
+            <label for="location">
+                Please type in your city name and we will tell you its current weather
+            </label>
+            <input type="text" id="location" name="location" minlength="1">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="other-info">
+            <h2 id="feels-like">Feels like</h2>
+            <p id="feels-like-temp"></p>
+
+            <h2 id="humidity">Humidity</h2>
+            <p id="humidity-value"></p>
+
+            <h2 id="rain">Chance of rain</h2>
+            <p id="chance-rain"></p>
+
+            <h2 id="wind">Wind speed</h2>
+            <p id="wind-speed"></p>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
