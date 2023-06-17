@@ -41,6 +41,7 @@ body {
 #result {
     grid-column: 4 / 6;
     grid-row: 2 / 4;
+    width: 100%;
 }
 
 input:invalid {

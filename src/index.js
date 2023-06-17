@@ -12,6 +12,8 @@ let humididty_value = document.querySelector("#humidity-value");
 let chance_rain = document.querySelector("#chance-rain");
 let wind_speed = document.querySelector("#wind-speed");
 
+let image = document.querySelector("#result");
+
 document.querySelector("button").addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -27,8 +29,19 @@ document.querySelector("button").addEventListener("click", (event) => {
         applyCurrentInfo(data);
         applyOtherInfo(data);
 
+        if (temperature.textContent <= 0) {
+            image.src = findGif("ice");
+        } else if (temperature.textContent > 0 && temperature <= 10) {
+            image.src = findGif("cold");
+        } else if (temperature.textContent > 10 && temperature <= 30) {
+            image.src = findGif("sunny");
+        } else {
+            image.src = findGif("hot");
+        }
+
     } else {
         document.querySelector(".error").textContent = "Please enter a sensible city name";
+        image.src = "../src/assets/error-img.png";
     }
 });
 
@@ -36,14 +49,12 @@ async function applyCurrentInfo(data) {
     status.textContent = await data.then((response) => { return response.current.condition.text });
     country.textContent = await data.then((response) => { return response.location.country });
     city.textContent = await data.then((response) => { return response.location.name });
-    temperature.textContent = await data.then((response) => { return response.current.temp_c });
+    temperature.textContent = await data.then((response) => { return response.current.temp_c + " °C"});
 }
 
 async function applyOtherInfo(data) {
-    console.log(data);
-
-    feels_like.textContent = await data.then((response) => { return response.current.feelslike_c });
-    humididty_value.textContent = await data.then((response) => { return response.current.humidity });
-    chance_rain.textContent = await data.then((response) => { return response.current.precip_in });
-    wind_speed.textContent = await data.then((response) => { return response.current.wind_mph });
+    feels_like.textContent = await data.then((response) => { return response.current.feelslike_c + " °C"});
+    humididty_value.textContent = await data.then((response) => { return response.current.humidity + "%"});
+    chance_rain.textContent = await data.then((response) => { return response.current.precip_in + "%" });
+    wind_speed.textContent = await data.then((response) => { return response.current.wind_mph + " mph" });
 }
