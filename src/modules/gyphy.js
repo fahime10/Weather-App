@@ -5,10 +5,10 @@ export function findGif(value) {
         return response.json();
     })
     .then(function(response) {
-        img.src = response.data.images.original.url;
+        console.log(response.data.images.original.url);
+        return response.data.images.original.url;
     })
     .catch(function(error) {
         img.src = 'assets/error-img.png';
-        console.log(error);
     }); 
 }
