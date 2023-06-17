@@ -19,22 +19,29 @@
                 Please type in your city name and we will tell you its current weather
             </label>
             <input type="text" id="location" name="location" minlength="1">
-            <button type="submit">Submit</button>
+            <span class="error"></span>
+            <button type="submit" class="submit">Submit</button>
         </form>
 
         <div id="other-info">
-            <h2 id="feels-like">Feels like</h2>
+            <h3 id="feels-like">Feels like</h2>
             <p id="feels-like-temp"></p>
 
-            <h2 id="humidity">Humidity</h2>
+            <h3 id="humidity">Humidity</h2>
             <p id="humidity-value"></p>
 
-            <h2 id="rain">Chance of rain</h2>
+            <h3 id="rain">Chance of rain</h2>
             <p id="chance-rain"></p>
 
-            <h2 id="wind">Wind speed</h2>
+            <h3 id="wind">Wind speed</h2>
             <p id="wind-speed"></p>
         </div>
+
+        <img id="result">
+
         <script src="main.js"></script>
+        <footer>
+            Developed by Fahim Ahmed
+        </footer>
     </body>
 </html>

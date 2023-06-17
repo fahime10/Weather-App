@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_weather_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/weather.js */ \"./src/modules/weather.js\");\n/* harmony import */ var _modules_gyphy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gyphy.js */ \"./src/modules/gyphy.js\");\n\r\n\r\n\r\n//useWeatherAPI();\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_weather_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/weather.js */ \"./src/modules/weather.js\");\n/* harmony import */ var _modules_gyphy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gyphy.js */ \"./src/modules/gyphy.js\");\n/* harmony import */ var _modules_validate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/validate.js */ \"./src/modules/validate.js\");\n\r\n\r\n\r\n\r\nlet country = document.querySelector(\"#country\");\r\nlet city = document.querySelector(\"#city\");\r\nlet temperature = document.querySelector(\"#temperature\");\r\n\r\ndocument.querySelector(\"button\").addEventListener(\"click\", (event) => {\r\n    event.preventDefault();\r\n\r\n    let city = document.querySelector(\"#location\").value;\r\n\r\n    let validatedCity = (0,_modules_validate_js__WEBPACK_IMPORTED_MODULE_2__.validateCity)(city);\r\n\r\n    if (validatedCity != \"\") {\r\n\r\n        const data = (0,_modules_weather_js__WEBPACK_IMPORTED_MODULE_0__.useWeatherAPI)(validatedCity);\r\n\r\n        console.log(data);\r\n\r\n        applyCurrentInfo(data);\r\n\r\n    } \r\n\r\n\r\n});\r\n\r\nasync function applyCurrentInfo(data) {\r\n    country.textContent = await data.then((response) => { return response.location.country });\r\n    city.textContent = await data.then((response) => { return response.location.name });\r\n    temperature.textContent = await data.then((response) => { return response.current.temp_c });\r\n}\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ }),
 
@@ -30,13 +30,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/modules/validate.js":
+/*!*********************************!*\
+  !*** ./src/modules/validate.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   validateCity: () => (/* binding */ validateCity)\n/* harmony export */ });\nfunction validateCity(city) {\r\n    if (city.length > 0) {\r\n        return city.toLowerCase();\r\n    } else {\r\n        return \"\";\r\n    }\r\n}\n\n//# sourceURL=webpack://weather-app/./src/modules/validate.js?");
+
+/***/ }),
+
 /***/ "./src/modules/weather.js":
 /*!********************************!*\
   !*** ./src/modules/weather.js ***!
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   useWeatherAPI: () => (/* binding */ useWeatherAPI)\n/* harmony export */ });\nasync function useWeatherAPI() {\r\n    try {\r\n        const response = \r\n            await fetch(\"https://api.weatherapi.com/v1/current.json?key=bb29db4074ae448e94c125809231506&q=london\", \r\n                {mode: \"cors\"});\r\n\r\n        const data = await response.json();\r\n\r\n        console.log(data);\r\n        console.log(data.current.feelslike_c);\r\n\r\n    } catch(error) {\r\n        console.log(\"Sorry, something went wrong, try again later whenever the weather is right\");\r\n    }\r\n}\n\n//# sourceURL=webpack://weather-app/./src/modules/weather.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   useWeatherAPI: () => (/* binding */ useWeatherAPI)\n/* harmony export */ });\nasync function useWeatherAPI(city) {\r\n    try {\r\n        const response = \r\n            await fetch(`https://api.weatherapi.com/v1/current.json?key=bb29db4074ae448e94c125809231506&q=${city}`, \r\n                {mode: \"cors\"});\r\n\r\n        return await response.json();\r\n\r\n    } catch(error) {\r\n        console.log(\"Sorry, something went wrong, try again later whenever the weather is right\");\r\n    }\r\n}\n\n//# sourceURL=webpack://weather-app/./src/modules/weather.js?");
 
 /***/ })
 
