@@ -1,5 +1,5 @@
 import { useWeatherAPI } from "./modules/weather.js";
-import { findGif } from "./modules/gyphy.js";
+import { useGiphyAPI } from "./modules/gyphy.js";
 import { validateCity } from "./modules/validate.js";
 
 let status = document.querySelector("#status");
@@ -28,16 +28,7 @@ document.querySelector("button").addEventListener("click", (event) => {
 
         applyCurrentInfo(data);
         applyOtherInfo(data);
-
-        if (temperature.textContent <= 0) {
-            image.src = findGif("ice");
-        } else if (temperature.textContent > 0 && temperature <= 10) {
-            image.src = findGif("cold");
-        } else if (temperature.textContent > 10 && temperature <= 30) {
-            image.src = findGif("sunny");
-        } else {
-            image.src = findGif("hot");
-        }
+        findGif();
 
     } else {
         document.querySelector(".error").textContent = "Please enter a sensible city name";
@@ -57,4 +48,16 @@ async function applyOtherInfo(data) {
     humididty_value.textContent = await data.then((response) => { return response.current.humidity + "%"});
     chance_rain.textContent = await data.then((response) => { return response.current.precip_in + "%" });
     wind_speed.textContent = await data.then((response) => { return response.current.wind_mph + " mph" });
+}
+
+async function findGif() {
+    if (temperature.textContent <= 0) {
+        image.src = await useGiphyAPI("ice");
+    } else if (temperature.textContent > 0 && temperature.textContent <= 10) {
+        image.src = await useGiphyAPI("cold");
+    } else if (temperature.textContent > 10 && temperature.textContent <= 30) {
+        image.src = await useGiphyAPI("sunny");
+    } else {
+        image.src = await useGiphyAPI("hot");
+    }
 }
