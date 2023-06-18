@@ -26,9 +26,7 @@ document.querySelector("button").addEventListener("click", (event) => {
 
         const data = useWeatherAPI(validatedCity);
 
-        applyCurrentInfo(data);
-        applyOtherInfo(data);
-        findGif();
+        Promise.all(applyCurrentInfo(data), applyOtherInfo(data), findGif());
 
     } else {
         document.querySelector(".error").textContent = "Please enter a sensible city name";
@@ -51,11 +49,11 @@ async function applyOtherInfo(data) {
 }
 
 async function findGif() {
-    if (temperature.textContent <= 0) {
+    if (temperature <= 0) {
         image.src = await useGiphyAPI("ice");
-    } else if (temperature.textContent > 0 && temperature.textContent <= 10) {
+    } else if (temperature > 0 && temperature <= 10) {
         image.src = await useGiphyAPI("cold");
-    } else if (temperature.textContent > 10 && temperature.textContent <= 30) {
+    } else if (temperature > 10 && temperature <= 30) {
         image.src = await useGiphyAPI("sunny");
     } else {
         image.src = await useGiphyAPI("hot");
