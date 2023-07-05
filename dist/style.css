@@ -40,8 +40,8 @@ body {
 }
 
 #image {
-    grid-column: 4 / 8;
-    grid-row: 4 / 6;
+    grid-column: 4 / 7;
+    grid-row: 4 / 7;
 }
 
 #result {

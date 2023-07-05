@@ -52,10 +52,10 @@ async function findGif() {
     if (temperature <= 0) {
         image.src = await useGiphyAPI("ice");
     } else if (temperature > 0 && temperature <= 10) {
-        image.src = await useGiphyAPI("cold");
+        image.src = await useGiphyAPI("cold-temperature");
     } else if (temperature > 10 && temperature <= 30) {
         image.src = await useGiphyAPI("sunny");
     } else {
-        image.src = await useGiphyAPI("hot");
+        image.src = await useGiphyAPI("hot-temperature");
     }
 }
