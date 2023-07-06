@@ -26,7 +26,9 @@ document.querySelector("button").addEventListener("click", (event) => {
 
         const data = useWeatherAPI(validatedCity);
 
-        Promise.all(applyCurrentInfo(data), applyOtherInfo(data), findGif());
+        Promise.resolve(applyCurrentInfo(data));
+        Promise.resolve(applyOtherInfo(data));
+        Promise.resolve(findGif());
 
     } else {
         document.querySelector(".error").textContent = "Please enter a sensible city name";
